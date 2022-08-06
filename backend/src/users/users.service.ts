@@ -10,7 +10,7 @@ export class UsersService {
     private readonly userModel: Model<User>,
   ) {}
 
-  async getAllUsers(){
+  async getAllUsers() {
     return this.userModel.find().exec();
   }
 }

@@ -21,19 +21,28 @@ export class User {
   password: string;
 
   @Prop()
-  isBloqued: boolean;
+  isBloqued?: boolean;
 
   @Prop()
-  isActivated: boolean;
+  isActivated?: boolean;
 
   @Prop()
-  emailToken: string;
+  emailToken?: string;
 
   @Prop()
   age: number;
 
   @Prop()
   adress: string;
+
+  @Prop()
+  maritalStatus: string;
+
+  @Prop()
+  profession: string;
+
+  @Prop()
+  identificationNumber: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(User);
