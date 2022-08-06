@@ -1,10 +1,9 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule, MongooseModuleAsyncOptions } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
-import mongoose, { Mongoose } from 'mongoose';
-import { url } from 'inspector';
+
 
 export const AppImports = [
   ConfigModule.forRoot({
@@ -23,11 +22,8 @@ export const AppImports = [
 
   MongooseModule.forRootAsync({
     imports: [ConfigModule],
-    connectionName: 'firstDB',
     useFactory: async (config: ConfigService) => ({
       uri: config.get('MONGO_URL'),
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     }),
     inject: [ConfigService],
   }),
