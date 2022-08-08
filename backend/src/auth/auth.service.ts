@@ -9,7 +9,7 @@ export class AuthService {
     private readonly usersService: UsersService,
   ) {}
 
-  register(userData: RegisterDto): any {
-    throw new Error('Method not implemented.' + userData);
+  async register(user: RegisterDto): Promise<any> {
+    return this.usersService.create(user);
   }
 }

@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
-
+import { BcryptModule } from './bcrypt/bcrypt.module';
 
 export const AppImports = [
   ConfigModule.forRoot({
@@ -29,4 +29,5 @@ export const AppImports = [
   }),
   AuthModule,
   UsersModule,
+  BcryptModule,
 ];
