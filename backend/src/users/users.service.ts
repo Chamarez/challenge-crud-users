@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -34,6 +34,21 @@ export class UsersService {
     } catch (e) {
       console.log(e);
     }
+  }
+  async update(id: string, user: RegisterDto): Promise<any> {
+    const userHash: any = { ...user };
+    userHash.password = this.generatePassword(user.password);
+    const response = this.userModel
+      .findOneAndUpdate(
+        { _id: id },
+        {
+          ...userHash,
+        },
+      )
+      .catch(() => {
+        throw new BadRequestException('User not found');
+      });
+    return !!response;
   }
   generatePassword(password: string): string {
     return this.bcryptProvider.hashSync(password, this.saltRounds);

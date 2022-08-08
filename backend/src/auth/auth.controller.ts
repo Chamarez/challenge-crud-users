@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 
@@ -9,5 +9,12 @@ export class AuthController {
   @Post('sign-up')
   async create(@Body() userData: RegisterDto): Promise<any> {
     return this.authService.register(userData);
+  }
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() userData: RegisterDto,
+  ): Promise<any> {
+    return this.authService.update(id, userData);
   }
 }

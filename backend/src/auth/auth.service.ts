@@ -12,4 +12,7 @@ export class AuthService {
   async register(user: RegisterDto): Promise<any> {
     return this.usersService.create(user);
   }
+  async update(id: string, user: RegisterDto): Promise<any> {
+    return this.usersService.update(id, user);
+  }
 }
