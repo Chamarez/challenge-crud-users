@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminDashboardComponent } from './core/admin-dashboard/admin-dashboard.component';
+import { RegisterComponent } from './core/register/register.component';
 
 const routes: Routes = [
-  {path:'admin-dashboard', component: AdminDashboardComponent},
-  {path: "", redirectTo:"admin-dashboard", pathMatch: 'full'},
-  {path: '**', redirectTo:"admin-dashboard", pathMatch: 'full'},
+  {path:'register', component: RegisterComponent},
+  {path: "", redirectTo:"register", pathMatch: 'full'},
+  {path: '**', redirectTo:"register", pathMatch: 'full'},
 
 ];
 
