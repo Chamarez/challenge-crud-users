@@ -1,0 +1,144 @@
+<div class="toolbar">
+  <mat-toolbar color="primary">
+    <span>My Application</span>
+  </mat-toolbar>
+</div>
+<div class="flex-container" fxLayout="row">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>First name</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+          <mat-label>Insert your first name</mat-label>
+        <input matInput placeholder="Example: john" formControlName="firstName" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Last name</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert your last name</mat-label>
+        <input matInput placeholder="Example: Wick" formControlName="lastName" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Email</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert a valid email</mat-label>
+        <input type="email"  matInput placeholder="Example: jhon.wick@gmail.com" formControlName="email" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Telephone number</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert your telephone number</mat-label>
+        <input
+          matInput
+          placeholder="Example: +39 111111111"
+          formControlName="telephoneNumber"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Password</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert a password</mat-label>
+        <input type="password" matInput formControlName="password" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Confirm password</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Confirm your password</mat-label>
+        <input type="password" matInput formControlName="confirmPassword" />
+        <div *ngIf="passwordMatchError">
+          <span class="error-message" >
+
+            Password does not match
+          </span>
+        </div>
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Age</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert your age</mat-label>
+        <input matInput type="number" placeholder="Example: 18" formControlName="age" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Adress</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert your Adress</mat-label>
+        <input matInput placeholder="Example: Via Garibaldi 17, Torino" formControlName="adress" />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Marital status</p>
+      </div>
+      <mat-form-field appearance="fill" class="form">
+        <mat-label>Select your marital status</mat-label>
+        <mat-select formControlName="maritalStatus">
+          <mat-option
+            *ngFor="let status of maritalStatus"
+            value="{{ status }}"
+            >{{ status }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Profession</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert your Profession</mat-label>
+        <input
+          matInput
+          placeholder="Example: Developer"
+          formControlName="profession"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" class="row">
+      <div fxFlexAlign="center" class="text">
+        <p>Identification number</p>
+      </div>
+      <mat-form-field appearance="outline" class="form">
+        <mat-label>Insert you identification number</mat-label>
+        <input
+          matInput
+          placeholder="Example: JKL15S"
+          formControlName="identificationNumber"
+        />
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Register
+      </button>
+    </div>
+  </form>
+</div>
