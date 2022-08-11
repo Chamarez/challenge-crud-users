@@ -60,8 +60,15 @@
       </div>
       <mat-form-field appearance="outline" class="form">
         <mat-label>Confirm your password</mat-label>
-        <input type="password" matInput formControlName="passwordConfirm" />
+        <input type="password" matInput formControlName="confirmPassword" />
+        <div *ngIf="passwordMatchError">
+          <span class="error-message" >
+
+            Password does not match
+          </span>
+        </div>
       </mat-form-field>
+
     </div>
     <div fxLayout="row" class="row">
       <div fxFlexAlign="center" class="text">

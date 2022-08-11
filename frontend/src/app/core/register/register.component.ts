@@ -1,70 +1,106 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmedValidator } from './custom.validator';
+import { RegisterService } from 'src/app/services/register.service';
+import { RegisterUser } from 'src/app/shared/models/registerUser.interface';
+import { CustomValidators } from './custom.validator';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  maritalStatus = ["single", "married", "divorced"]
+  maritalStatus = ['single', 'married', 'divorced'];
 
-  constructor( private fb: FormBuilder, private router: Router) {
-    this.form = this.fb.group({
-      firstName: ['',[Validators.required]],
-      lastName: ['',[Validators.required]],
-      email: ['', [Validators.required,Validators.minLength(6), Validators.email ]],
-      telephoneNumber:['',[Validators.required]],
-      password: ['',[Validators.required]],
-      passwordConfirm: ['',[Validators.required]],
-      age: ['',[Validators.required]],
-      adress: ['',[Validators.required]],
-      maritalStatus: [this.maritalStatus[0],[]],
-      profession: ['',[Validators.required]],
-      identificationNumber: ['',[Validators.required]],
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private registerService: RegisterService,
+    private dialog: MatDialog
+  ) {
+    this.form = new FormGroup(
+      {
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.email,
+        ]),
+        telephoneNumber: new FormControl(
+          '',
+          [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
+        ),
+        password: new FormControl('', [Validators.required,Validators.minLength(8)]),
+        confirmPassword: new FormControl('', [Validators.required]),
+        age: new FormControl('', [Validators.required]),
+        adress: new FormControl('', [Validators.required]),
+        maritalStatus: new FormControl(this.maritalStatus[0], []),
+        profession: new FormControl('', [Validators.required]),
+        identificationNumber: new FormControl('', [Validators.required]),
+      },
 
-
-    },{
-      validator: ConfirmedValidator('password', 'passwordConfirm')
-
-
-    }
-    );
-
-
-
+      [CustomValidators.MatchValidator('password', 'confirmPassword')]
+      );
   }
   ngOnInit(): void {}
 
-  isMobile(){
-    return(
-        (navigator.userAgent.match(/Android/i)) ||
-        (navigator.userAgent.match(/webOS/i)) ||
-        (navigator.userAgent.match(/iPhone/i)) ||
-        (navigator.userAgent.match(/iPod/i)) ||
-        (navigator.userAgent.match(/iPad/i)) ||
-        (navigator.userAgent.match(/BlackBerry/i))
-        );}
-
+  isMobile() {
+    return (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/BlackBerry/i)
+    );
+  }
 
   onSubmit() {
-        const username = this.form.value.username;
-        const password = this.form.value.password;
-        const role = "reader";
-        const country = this.form.value.country;
-        const city = this.form.value.city;
-        const userData = {
-          username:username,
-          password:password,
-          role: role,
-          country: country,
-          city: city
-          }
+    const userData: RegisterUser = {
+      firstName: this.form.value.firstName,
+      lastName: this.form.value.lastName,
+      email: this.form.value.email,
+      telephoneNumber: "+39"+this.form.value.telephoneNumber,
+      password: this.form.value.password,
+      age: parseInt(this.form.value.age),
+      adress: this.form.value.adress,
+      maritalStatus: this.form.value.maritalStatus,
+      profession: this.form.value.profession,
+      identificationNumber: this.form.value.identificationNumber,
+    };
+    this.registerService.register(userData).subscribe({
+      next: (v) => console.log(v),
+      error: (e) => alert(e.error.message),
+      complete: () => this.dialog.open(SuccessfullyModal),
+    });
+  }
 
-        }
+  get passwordMatchError() {
+    return (
+      this.form.getError('mismatch') &&
+      this.form.get('confirmPassword')?.touched
+    );
+  }
 }
 
-
+@Component({
+  selector: 'successfully-modal-html',
+  templateUrl: 'successfully.modal.html',
+})
+export class SuccessfullyModal {
+  constructor(    private dialog: MatDialog
+    ){}
+  close(){
+    this.dialog.closeAll()
+  }
+}

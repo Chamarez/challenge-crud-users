@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -30,7 +31,8 @@ const modules = [
   MatInputModule,
   MatSelectModule,
   FlexLayoutModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule
 
 ];
 
