@@ -1,0 +1,15 @@
+[NODE]
+NODE_ENV=development
+APP_PORT=3030
+
+APP_PREFIX=accounts
+
+
+[JWT]
+JWT_SECRET=secret
+
+[CRYPTO]
+CRYPTO_SECRET_KEY=secret
+
+[DATABASE]
+MONGO_URL=mongodb://localhost:27017/test

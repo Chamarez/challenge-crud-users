@@ -1,0 +1,35 @@
+.toolbar{
+  width: 100vw;
+}
+.flex-container{
+width: 100vw;
+
+
+}
+
+.row{
+  width: 100vw;
+  display: flex;
+  text-align: center;
+  justify-content: flex-start;
+}
+
+.form{
+  width: 40vw;
+}
+.text{
+  text-align:left;
+  margin-left: 2vh;
+  width: 30vw;
+}
+
+.button-container{
+  text-align: center;
+}
+.submit-button{
+  width: 30vh;
+}
+
+.error-message{
+color: #f44336 !important;
+}
