@@ -32,7 +32,7 @@ export class UsersService {
       const userHash: any = { ...user };
       userHash.password = this.generatePassword(user.password);
       userHash.roles = Role.USER;
-      console.log(userHash)
+      console.log(userHash);
       const newUser = await this.userModel.create(userHash);
       return newUser;
     } catch (e) {
