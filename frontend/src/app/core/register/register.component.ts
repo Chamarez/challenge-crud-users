@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
         ]),
         telephoneNumber: new FormControl(
           '',
-          [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
+          [Validators.required],
         ),
         password: new FormControl('', [Validators.required,Validators.minLength(8)]),
         confirmPassword: new FormControl('', [Validators.required]),
@@ -54,16 +54,6 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  isMobile() {
-    return (
-      navigator.userAgent.match(/Android/i) ||
-      navigator.userAgent.match(/webOS/i) ||
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPod/i) ||
-      navigator.userAgent.match(/iPad/i) ||
-      navigator.userAgent.match(/BlackBerry/i)
-    );
-  }
 
   onSubmit() {
     const userData: RegisterUser = {
@@ -78,6 +68,7 @@ export class RegisterComponent implements OnInit {
       profession: this.form.value.profession,
       identificationNumber: this.form.value.identificationNumber,
     };
+    console.log(userData)
     this.registerService.register(userData).subscribe({
       next: (v) => console.log(v),
       error: (e) => alert(e.error.message),

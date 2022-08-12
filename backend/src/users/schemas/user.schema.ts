@@ -6,16 +6,16 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop()
+  @Prop({ required: true, unique: false })
   firstName: string;
 
-  @Prop()
+  @Prop({ required: true, unique: false })
   lastName: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   telephoneNumber: number;
 
   @Prop()
@@ -30,22 +30,22 @@ export class User {
   @Prop()
   emailToken?: string;
 
-  @Prop()
+  @Prop({ required: true })
   age: number;
 
-  @Prop()
+  @Prop({ required: true })
   adress: string;
 
-  @Prop()
+  @Prop({ required: true })
   maritalStatus: string;
 
-  @Prop()
+  @Prop({ required: true })
   profession: string;
 
-  @Prop()
+  @Prop({ required: true })
   identificationNumber: string;
 
-  @Prop()
+  @Prop({ required: true })
   roles: Role;
 }
 

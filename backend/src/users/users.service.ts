@@ -36,7 +36,7 @@ export class UsersService {
       const newUser = await this.userModel.create(userHash);
       return newUser;
     } catch (e) {
-      console.log(e);
+      throw new BadRequestException();
     }
   }
   async update(id: string, user: RegisterDto): Promise<any> {
